@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dprvpcto8mhgv"]
+
+[ext_resource type="Texture2D" uid="uid://c2jfvq6ggiwyi" path="res://Art/Image/Trees/Spruce1_idle_full.png" id="1_j6s44"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_obl4x"]
+texture = ExtResource("1_j6s44")
+0:1/size_in_atlas = Vector2i(4, 7)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 42)
+
+[resource]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(64, 32)
+sources/1 = SubResource("TileSetAtlasSource_obl4x")

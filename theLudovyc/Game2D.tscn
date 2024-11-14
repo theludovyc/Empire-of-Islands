@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbbuj3ne5rupv"]
+[gd_scene load_steps=17 format=3 uid="uid://bbbuj3ne5rupv"]
 
 [ext_resource type="Script" path="res://theLudovyc/Game2D.gd" id="1_i3wk0"]
 [ext_resource type="Script" path="res://theLudovyc/EventBus.gd" id="2_jbfdl"]
@@ -8,11 +8,14 @@
 [ext_resource type="Script" path="res://theLudovyc/TheMarket.gd" id="4_gvgis"]
 [ext_resource type="Script" path="res://theLudovyc/TileMap.gd" id="4_lfw1e"]
 [ext_resource type="Script" path="res://theLudovyc/TheBank.gd" id="4_s5v76"]
-[ext_resource type="TileSet" uid="uid://bhin7dsw4tvvl" path="res://theLudovyc/new_tile_set.tres" id="5_6up2t"]
 [ext_resource type="Script" path="res://theLudovyc/Camera2D.gd" id="5_7hgfn"]
 [ext_resource type="PackedScene" uid="uid://b3s7eqy0blp6g" path="res://theLudovyc/GUI/GUI.tscn" id="6_lovin"]
 [ext_resource type="Script" path="res://theLudovyc/TheTicker.gd" id="7_41bva"]
+[ext_resource type="TileSet" uid="uid://bhin7dsw4tvvl" path="res://theLudovyc/new_tile_set.tres" id="11_gqnmu"]
+[ext_resource type="TileSet" uid="uid://dprvpcto8mhgv" path="res://theLudovyc/tile_set_trees.tres" id="12_25naw"]
+[ext_resource type="Script" path="res://Script/World/GroundLayer.gd" id="12_dmqkb"]
 [ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://Scene/RGT/PauseMenu.tscn" id="13_xikc4"]
+[ext_resource type="Script" path="res://Script/World/TreesLayer.gd" id="14_wtd65"]
 
 [node name="Game2D" type="Node"]
 script = ExtResource("1_i3wk0")
@@ -52,14 +55,20 @@ y_sort_enabled = true
 [node name="TileMap" type="TileMap" parent="ZSorter"]
 unique_name_in_owner = true
 y_sort_enabled = true
-tile_set = ExtResource("5_6up2t")
 format = 2
-layer_0/name = "Ground"
-layer_0/y_sort_enabled = true
-layer_1/name = "Trees"
-layer_1/y_sort_enabled = true
-layer_1/z_index = 1
 script = ExtResource("4_lfw1e")
+
+[node name="GroundLayer" type="TileMapLayer" parent="ZSorter/TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("11_gqnmu")
+script = ExtResource("12_dmqkb")
+
+[node name="TreesLayer" type="TileMapLayer" parent="ZSorter/TileMap"]
+z_index = 2
+y_sort_enabled = true
+tile_set = ExtResource("12_25naw")
+script = ExtResource("14_wtd65")
 
 [node name="Entities" type="Node2D" parent="ZSorter"]
 unique_name_in_owner = true
@@ -67,7 +76,6 @@ z_index = 1
 y_sort_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 2

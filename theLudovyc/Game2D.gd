@@ -51,7 +51,7 @@ func _ready():
 
 	var warehouse_center_tile = Vector2i(1, 20)
 
-	warehouse.position = tm.map_to_local(warehouse_center_tile)
+	warehouse.position = tm.ground_layer.map_to_local(warehouse_center_tile)
 
 	tm.build_entityStatic(warehouse, warehouse_center_tile)
 
@@ -96,9 +96,11 @@ func _process(delta):
 
 	rtl.text += str(mouse_pos) + "\n"
 
-	var tile_pos = tm.local_to_map(mouse_pos)
+	var tile_pos = tm.ground_layer.local_to_map(mouse_pos)
 
 	rtl.text += str(tile_pos) + "\n"
+	
+	rtl.text += str(tm.minimap_get_cell(tile_pos))
 
 	rtl.text += str(tm.is_constructible(tile_pos)) + "\n"
 
@@ -111,7 +113,7 @@ func _process(delta):
 
 	#spawn entity
 	if cursor_entity:
-		cursor_entity.position = tm.map_to_local(tile_pos)
+		cursor_entity.position = tm.ground_layer.map_to_local(tile_pos)
 
 		var building_id = cursor_entity.building_id
 

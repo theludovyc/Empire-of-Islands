@@ -1,6 +1,9 @@
 extends TileMap
+class_name MyTileMap
 
 @onready var game:Game2D = get_tree().current_scene
+@onready var ground_layer = $GroundLayer
+@onready var trees_layer = $TreesLayer
 
 var map_size:Vector2i
 
@@ -60,7 +63,7 @@ func build_entityStatic(entity:EntityStatic, tile_center:Vector2i):
 			var tile_coord = top_left_tile + Vector2i(x, y)
 			
 			if minimap_get_cell(tile_coord) == Minimap_Cell_Type.Tree:
-				erase_cell(1, tile_coord)
+				trees_layer.erase_cell(tile_coord)
 			
 			minimap_set_cell_vec(tile_coord, Minimap_Cell_Type.Building)
 
@@ -87,63 +90,31 @@ func create_island(map_file:String) -> int:
 		push_error("Error: can't parse json")
 		return FAILED
 	
-	var set_cells = func(array_in, atlas_pos, array_out, type:Minimap_Cell_Type):
-		for i in range(0, array_in.size(), 2):
-			var tile_vec = Vector2i(array_in[i], array_in[i + 1])
-			
-			minimap_set_cell_vec(tile_vec, type)
-			
-			array_out.push_back(tile_vec)
-			
-			set_cell(0, tile_vec, 1, atlas_pos)
-	
-	var deep_tiles:PackedVector2Array
-	var shallow_tiles:PackedVector2Array
-	var sand_tiles:PackedVector2Array
-	var ground_tiles:PackedVector2Array
-	
 	var json_map_size = json.data["size"]
 	
 	map_size = Vector2i(json_map_size[0], json_map_size[1])
 	
 	minimap.resize(map_size.x * map_size.y)
 	
-	set_cells.call(json.data["deep_tiles"], Vector2i(1, 2),
-		deep_tiles, Minimap_Cell_Type.Deep)
-	set_cells.call(json.data["shallow_tiles"], Vector2i(4, 2),
-		shallow_tiles, Minimap_Cell_Type.Shallow)
-	set_cells.call(json.data["sand_tiles"], Vector2i(7, 2),
-		sand_tiles, Minimap_Cell_Type.Sand)
-	set_cells.call(json.data["ground_tiles"], Vector2i(7, 6),
-		ground_tiles, Minimap_Cell_Type.Ground)
-
-	set_cells_terrain_connect(0, ground_tiles, 0, 3)
-	set_cells_terrain_connect(0, sand_tiles, 0, 2)
-	set_cells_terrain_connect(0, shallow_tiles, 0, 1)
+	ground_layer.create_terrain(
+		json.data["deep_tiles"],
+		json.data["shallow_tiles"],
+		json.data["sand_tiles"],
+		json.data["ground_tiles"]
+	)
 	
-	# spawn trees
-	var noise := FastNoiseLite.new()
-	noise.frequency = 0.3
-	
-	for i in range(minimap.size()):
-		if minimap[i] == Minimap_Cell_Type.Ground:
-			var pos = minimap_get_pos(i)
-			
-			if noise.get_noise_2dv(pos) > 0.1:
-				set_cell(1, pos, 2, Vector2.ZERO)
-			
-				minimap[i] = Minimap_Cell_Type.Tree
+	trees_layer.create_trees()
 	
 	return OK
 
 func get_pos_limits() -> PackedVector2Array:
-	var used_rect = get_used_rect()
+	var used_rect = ground_layer.get_used_rect()
 	
 	var pre_array:PackedVector2Array = [
-		map_to_local(used_rect.position),
-		map_to_local(used_rect.position + Vector2i(used_rect.size.x, 0)),
-		map_to_local(used_rect.position + Vector2i(0, used_rect.size.y)),
-		map_to_local(used_rect.position + Vector2i(used_rect.size.x, used_rect.size.y))
+		ground_layer.map_to_local(used_rect.position),
+		ground_layer.map_to_local(used_rect.position + Vector2i(used_rect.size.x, 0)),
+		ground_layer.map_to_local(used_rect.position + Vector2i(0, used_rect.size.y)),
+		ground_layer.map_to_local(used_rect.position + Vector2i(used_rect.size.x, used_rect.size.y))
 	]
 	
 	var return_array:PackedVector2Array = [

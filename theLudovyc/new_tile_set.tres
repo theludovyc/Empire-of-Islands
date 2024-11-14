@@ -1,7 +1,6 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bhin7dsw4tvvl"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bhin7dsw4tvvl"]
 
 [ext_resource type="Texture2D" uid="uid://7c4ox3ucr5vn" path="res://theLudovyc/terrain0.png" id="1_plq3n"]
-[ext_resource type="Texture2D" uid="uid://dj08oyiw86456" path="res://theLudovyc/Trees/Spruce.png" id="2_ixn8v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h1cbt"]
 texture = ExtResource("1_plq3n")
@@ -528,14 +527,6 @@ texture_region_size = Vector2i(64, 32)
 6:8/0/terrains_peering_bit/top_corner = 3
 6:8/0/terrains_peering_bit/top_right_side = 3
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wfq6b"]
-texture = ExtResource("2_ixn8v")
-texture_region_size = Vector2i(64, 32)
-0:0/size_in_atlas = Vector2i(1, 4)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 45)
-0:0/0/y_sort_origin = 6
-
 [resource]
 tile_shape = 1
 tile_layout = 4
@@ -552,4 +543,3 @@ terrain_set_0/terrain_3/color = Color(0, 0.858824, 0.113725, 1)
 custom_data_layer_0/name = "Constructible"
 custom_data_layer_0/type = 1
 sources/1 = SubResource("TileSetAtlasSource_h1cbt")
-sources/2 = SubResource("TileSetAtlasSource_wfq6b")
