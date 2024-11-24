@@ -1,47 +1,16 @@
-<p align="center"><a href="http://unknown-horizons.org/"><img src="http://unknown-horizons.org/static/logo.svg" alt="Unknown Horizons" width="278" height="326"></a></p>
+This a fork of the unknown horizons game. Find more information about it [here](https://unknown-horizons.org/).
 
-**We are looking for developers for our [Godot Engine](https://godotengine.org/) port**.
-We want to port it because our current engine is basically dead.
-The used GUI library is also dead with a lot of issues.
-We really love our game and the community loves it too.
+## Fork differences
 
-We are looking for:
+Unknow horizons is an open-source 2D game real time strategy simulation mainly inspired by the Anno series with an emphasis on economy and city building. You can expand your small settlement to a strong and wealthy colony, collect taxes and supply your inhabitants with valuable goods. And increase your power with a well balanced economy and with strategic trade and diplomacy.
 
-- Mainly, Godot programmers.
-- A graphics artist would be handy. For new assets but also to potentially rework existing graphical content. We have a lot of blender files.
-- Later, a sound effects and music creator would be nice too.
-- A design document writer would be really nice as well, so that
-our [wiki](https://github.com/unknown-horizons/godot-port/wiki)
-could get a lot of more information.
-
----
-
-**Unknown Horizons** is a 2D real time strategy simulation with
-an emphasis on economy and city building. Expand your small
-settlement to a strong and wealthy colony, collect taxes and
-supply your inhabitants with valuable goods. Increase your
-power with a well balanced economy and with strategic trade
-and diplomacy.
-
-Find more information about Unknown Horizons on [our website](https://unknown-horizons.org/).
+This version differ by the fact it is a ticks based game, this mean events will follow a clock. You can see it like turn in a board game, but automatic. Instead of a real time strategy simulation, by example the resource production in each building and their transport in real time, each tick: all the game is updated. When you play game like anno, 4X, or other city builder, you are often inscrease time speed by 3 or 4, to avoid waiting because real time is too slow. It will not happen with this ticks system, because in 1 tick you can produce, buy or sell resources. Also, it will reduce the huge amount of work needed to create a simulation. Plus it permits to increase performances ! And yes, we will use magic (maths), to make things moving on screens like it was on real time.
 
 ## Contributing
 
 This project is based on Godot 4. Get it from [https://godotengine.org/download/](https://godotengine.org/download/), open the executable, import the project and you are good to go for developing and playtesting. No compilation needed!
 
-Also consulate [CONTRIBUTING.md](./CONTRIBUTING.md) for the project goals and further instructions regarding the setup and coding-related instructions. The Godot port is in an early experimental state with no playable content at this point of time and therefore no release date set in stone.
-
-For that reason, please check out the [original project](https://github.com/unknown-horizons/unknown-horizons) which bears a decade long active development history with tons of implemented features and will provide you a better insight on the desired look and feel than any textual explanation could do (even more so if being unfamiliar with RTS games). Besides you should be able to grab existing logic and convert it appropriately for the Godot/GDScript style.
-
-## Community
-
-Type         | Where?
--------------|-----------------------------------------------------------------------
-Discord      | https://discord.gg/VX6m2ZX
-Bug Tracker  | https://github.com/unknown-horizons/godot-port/issues
-IRC Channel  | irc://irc.libera.chat/unknown-horizons
-Web IRC Link | https://kiwiirc.com/nextclient/irc.libera.chat/#unknown-horizons
-Forum        | https://forum.freegamedev.net/viewforum.php?f=100
+Also consulate [CONTRIBUTING.md](./CONTRIBUTING.md) for the project goals and further instructions regarding the setup and coding-related instructions.
 
 ## License
 
