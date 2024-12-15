@@ -5,6 +5,7 @@ var event_bus: EventBus = null
 @onready var _resource_texture = $VBoxContainer/TextureRect
 
 @onready var buy_spin_box = $BuySpinBox
+@onready var sell_spin_box = $SellSpinBox
 
 @onready var delete_button = $VBoxContainer/DeleteButton
 
@@ -41,6 +42,8 @@ func _on_SellSpinBox_value_changed(value):
 	if event_bus != null:
 		event_bus.ask_update_order_sell.emit(_resource_type, value)
 
+func force_sell_value(sell_amount:int):
+	sell_spin_box.set_value_no_signal(sell_amount)
 
 func _on_DeleteButton_pressed():
 	delete_button.disabled = true

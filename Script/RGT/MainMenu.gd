@@ -1,7 +1,7 @@
 class_name MainMenu
 extends Control
 
-#var sub_menu
+var sub_menu
 
 #@onready var continue_button = %ContinueButton
 @onready var play_button = %PlayButton
@@ -18,27 +18,27 @@ extends Control
 	exit_button
 ]
 
-#@onready var load_save_menu = %LoadSaveMenu
+@onready var load_save_menu = %LoadSaveMenu
 #@onready var option_menu = %OptionsMenu
 #@onready var credit_menu = %CreditsContainer
 
 @onready var confirm_popup = %ConfirmationDialog
 
-#func _open_sub_menu(menu : Control):
-	#if sub_menu == menu:
-		#sub_menu.visible = !sub_menu.visible
-		#return
-	#if sub_menu != null:
-		#sub_menu.hide()
-	#sub_menu = menu
-	#sub_menu.show()
+func _open_sub_menu(menu : Control):
+	if sub_menu == menu:
+		sub_menu.visible = !sub_menu.visible
+		return
+	if sub_menu != null:
+		sub_menu.hide()
+	sub_menu = menu
+	sub_menu.show()
 
 
-#func _close_sub_menu():
-	#if sub_menu == null:
-		#return
-	#sub_menu.hide()
-	#sub_menu = null
+func _close_sub_menu():
+	if sub_menu == null:
+		return
+	sub_menu.hide()
+	sub_menu = null
 
 
 #func _event_is_mouse_button_released(event : InputEvent):
@@ -86,8 +86,8 @@ func _on_play_button_pressed():
 	
 	SceneLoader.change_scene(RGT_Globals.first_game_scene_setting)
 
-#func _on_load_button_pressed() -> void:
-	#_open_sub_menu(load_save_menu)
+func _on_load_button_pressed() -> void:
+	_open_sub_menu(load_save_menu)
 #
 #func _on_options_button_pressed():
 	#_open_sub_menu(option_menu)
@@ -101,11 +101,11 @@ func _on_exit_button_pressed():
 func _on_exit_confirmed():
 	get_tree().quit()
 
-#func _on_back_button_pressed():
-	#_close_sub_menu()
+func _on_back_button_pressed():
+	_close_sub_menu()
 
-#func _on_load_save_menu_no_save_to_load() -> void:
+func _on_load_save_menu_no_save_to_load() -> void:
 	#continue_button.hide()
-	#load_button.hide()
-	#
-	#_close_sub_menu()
+	load_button.hide()
+	
+	_close_sub_menu()

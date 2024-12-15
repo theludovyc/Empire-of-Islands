@@ -81,3 +81,20 @@ func recalculate_orders_cost():
 		tmp_orders_cost += resource_cost * order.sell_amount
 
 	orders_cost = tmp_orders_cost
+
+func get_bank_save() -> Dictionary:
+	return {"Money": [money, money_production_rate]}
+	
+func load_bank_save() -> Error:
+	if SaveHelper.last_loaded_data.is_empty():
+		return FAILED
+		
+	var bank_data:Array = SaveHelper.last_loaded_data.get("Money", [])
+	
+	if bank_data.is_empty():
+		return FAILED
+	
+	money = bank_data[0]
+	money_production_rate = bank_data[1]
+	
+	return OK

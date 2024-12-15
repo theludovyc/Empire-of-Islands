@@ -6,7 +6,7 @@ class_name TheFactory
 @onready var event_bus = $"../EventBus"
 
 enum Production_Line { current_workers, production_rate, current_ticks }
-var production_lines = {}
+var production_lines := {}
 
 var workers := 0:
 	set(value):
@@ -14,7 +14,7 @@ var workers := 0:
 		event_bus.available_workers_updated.emit(game.population - workers)
 
 enum Waiting_Lines { resource_type, needed_workers }
-var waiting_lines = []
+var waiting_lines := []
 
 
 func get_production_rate_per_tick(resource_type: Resources.Types) -> int:
@@ -158,3 +158,33 @@ func _on_TheTicker_tick():
 			line[Production_Line.current_ticks] = 0
 
 			storage.add_resource(resource_type, line[Production_Line.production_rate])
+
+func get_factory_save() -> Dictionary:
+	return {"Factory":[workers, production_lines, waiting_lines]}
+	
+func load_factory_save() -> Error:
+	if SaveHelper.last_loaded_data.is_empty():
+		return FAILED
+		
+	var factory_data:Array = SaveHelper.last_loaded_data.get("Factory", [])
+	
+	if factory_data.is_empty():
+		return FAILED
+		
+	workers = factory_data[0]
+	
+	waiting_lines = factory_data[2]
+	
+	for line:String in factory_data[1]:
+		var resource_type:int = line.to_int()
+		
+		if not Resources.Types.values().has(resource_type):
+			push_error("Cannot create a production line from an unknow resource type: " + line)
+			
+			continue
+		
+		production_lines[resource_type] = factory_data[1][line]
+		
+		storage.update_global_production_rate(resource_type)
+		
+	return OK

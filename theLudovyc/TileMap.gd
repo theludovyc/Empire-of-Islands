@@ -66,6 +66,9 @@ func build_entityStatic(entity:EntityStatic, tile_center:Vector2i):
 				trees_layer.erase_cell(tile_coord)
 			
 			minimap_set_cell_vec(tile_coord, Minimap_Cell_Type.Building)
+			
+func conclude_building_construction(building:Building2D):
+	build_entityStatic(building, ground_layer.local_to_map(building.position))
 
 func demolish_building(building:Building2D):
 	var top_left_tile = entityStatic_get_top_left_tile(building,
@@ -138,7 +141,3 @@ func get_pos_limits() -> PackedVector2Array:
 
 func local_to_map_to_local(position:Vector2) -> Vector2:
 	return map_to_local(local_to_map(position))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbbuj3ne5rupv"]
+[gd_scene load_steps=18 format=3 uid="uid://bbbuj3ne5rupv"]
 
 [ext_resource type="Script" path="res://theLudovyc/Game2D.gd" id="1_i3wk0"]
 [ext_resource type="Script" path="res://theLudovyc/EventBus.gd" id="2_jbfdl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://theLudovyc/Camera2D.gd" id="5_7hgfn"]
 [ext_resource type="PackedScene" uid="uid://b3s7eqy0blp6g" path="res://theLudovyc/GUI/GUI.tscn" id="6_lovin"]
 [ext_resource type="Script" path="res://theLudovyc/TheTicker.gd" id="7_41bva"]
+[ext_resource type="Script" path="res://Script/TheBuilder.gd" id="7_gnc51"]
 [ext_resource type="TileSet" uid="uid://bhin7dsw4tvvl" path="res://theLudovyc/new_tile_set.tres" id="11_gqnmu"]
 [ext_resource type="TileSet" uid="uid://dprvpcto8mhgv" path="res://theLudovyc/tile_set_trees.tres" id="12_25naw"]
 [ext_resource type="Script" path="res://Script/World/GroundLayer.gd" id="12_dmqkb"]
@@ -34,6 +35,9 @@ script = ExtResource("3_6uk0m")
 
 [node name="TheMarket" type="Node" parent="."]
 script = ExtResource("4_gvgis")
+
+[node name="TheBuilder" type="Node" parent="."]
+script = ExtResource("7_gnc51")
 
 [node name="TheTicker" type="Timer" parent="."]
 wait_time = 2.0
@@ -70,7 +74,7 @@ y_sort_enabled = true
 tile_set = ExtResource("12_25naw")
 script = ExtResource("14_wtd65")
 
-[node name="Entities" type="Node2D" parent="ZSorter"]
+[node name="Buildings" type="Node2D" parent="ZSorter"]
 unique_name_in_owner = true
 z_index = 1
 y_sort_enabled = true
@@ -100,3 +104,4 @@ unique_name_in_owner = true
 [connection signal="cycle" from="TheTicker" to="TheMarket" method="_on_TheTicker_cycle"]
 [connection signal="tick" from="TheTicker" to="TheFactory" method="_on_TheTicker_tick"]
 [connection signal="timeout" from="TheTicker" to="TheTicker" method="_on_timeout"]
+[connection signal="ask_to_save" from="GUI/PauseMenu" to="." method="_on_PauseMenu_ask_to_save"]

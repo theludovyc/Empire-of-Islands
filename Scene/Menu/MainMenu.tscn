@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dytw0n3b07ux4"]
+[gd_scene load_steps=19 format=3 uid="uid://dytw0n3b07ux4"]
 
 [ext_resource type="Script" path="res://Script/Gui/Menu/MainMenu.gd" id="1"]
 [ext_resource type="Theme" uid="uid://lyx8kydf373j" path="res://Art/Theme/MenuTheme.tres" id="1_i4hjr"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://fnwe2ccpoxu7" path="res://Art/Image/Gui/Icons/MainMenu/multiplayer_bw.png" id="11_ulff8"]
 [ext_resource type="Texture2D" uid="uid://dx3wfk7nhepo7" path="res://Art/Image/Gui/Logos/uh_no_text.svg" id="12_q4rhy"]
 [ext_resource type="Texture2D" uid="uid://lxvd4qr8d35m" path="res://Art/Image/Gui/Logos/uh_only_text.svg" id="13_yw4on"]
+[ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://Scene/RGT/loadSaveMenu.tscn" id="15_fufc5"]
 
 [sub_resource type="Animation" id="Animation_ft716"]
 length = 0.001
@@ -202,7 +203,6 @@ offset_left = -158.0
 offset_top = -160.0
 offset_right = -58.0
 offset_bottom = -60.0
-disabled = true
 text = "Load Game"
 texture = ExtResource("6_6uh4k")
 
@@ -347,6 +347,39 @@ texture = ExtResource("13_yw4on")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="PanelMenu" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadSaveMenu" parent="PanelMenu" instance=ExtResource("15_fufc5")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="PanelMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = 16.0
+offset_right = 37.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+
 [node name="VersionNumber" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
@@ -371,4 +404,6 @@ unique_name_in_owner = true
 dialog_text = "Are you sure you want to quit ?"
 
 [connection signal="pressed" from="Decoration/MenuItems/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Decoration/MenuItems/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Decoration/MenuItems/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelMenu/BackButton" to="." method="_on_back_button_pressed"]

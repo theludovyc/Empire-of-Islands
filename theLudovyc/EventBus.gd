@@ -32,6 +32,7 @@ signal money_production_rate_updated(money_production_rate)
 ## ORDER
 signal ask_create_new_order(resource_type)
 signal send_create_new_order(resource_type)
+signal send_create_new_order_with_values(resource_type, buy_amount, sell_amount)
 
 signal ask_remove_order(resource_type)
 signal send_remove_order(resource_type)

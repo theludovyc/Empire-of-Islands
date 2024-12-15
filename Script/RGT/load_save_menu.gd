@@ -5,7 +5,7 @@ signal no_save_to_load
 const confirm_load = "Are you sure you want to load this save?\n"
 const confirm_delete = "Are you sure you want to delete this save ?\n"
 
-var SavePanel = preload("res://Scene/RGT/savePanelContainer.tscn")
+var SavePanel = preload("res://scenes/LoadSaveMenu/savePanelContainer.tscn")
 
 @onready var vbox_container = $VBoxContainer
 

@@ -20,6 +20,7 @@ func _ready():
 		event_bus = current_scene.get_node("EventBus") as EventBus
 
 		event_bus.send_create_new_order.connect(_on_receive_create_new_order)
+		event_bus.send_create_new_order_with_values.connect(_on_receive_create_new_order_with_values)
 		event_bus.send_remove_order.connect(_on_receive_remove_order)
 		event_bus.send_update_order_buy.connect(_on_receive_update_order_buy)
 		event_bus.money_production_rate_updated.connect(_on_receive_money_production_rate_updated)
@@ -44,6 +45,17 @@ func _on_receive_create_new_order(resource_type: Resources.Types):
 
 	order_nodes[resource_type] = resource_order
 
+func _on_receive_create_new_order_with_values(resource_type: Resources.Types,
+	buy_amount:int, sell_amount:int):
+	var resource_order = resource_order_scene.instantiate()
+
+	order_container.add_child(resource_order)
+
+	resource_order._resource_type = resource_type
+	resource_order.force_buy_value(buy_amount)
+	resource_order.force_sell_value(sell_amount)
+
+	order_nodes[resource_type] = resource_order
 
 func _on_receive_remove_order(resource_type: Resources.Types):
 	order_nodes[resource_type].queue_free()

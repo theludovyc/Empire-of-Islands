@@ -1,7 +1,7 @@
 extends Node
 class_name TheStorage
 
-var storage = {}
+var storage := {}
 
 @onready var event_bus = $"../EventBus"
 
@@ -91,3 +91,20 @@ func recover_building_construction(building_id: Buildings.Ids):
 
 	for cost in building_cost:
 		add_resource(cost[0], cost[1])
+
+func get_storage_save() -> Dictionary:
+	return {"Storage":storage}
+	
+func load_storage_save() -> Error:
+	if SaveHelper.last_loaded_data.is_empty():
+		return FAILED
+		
+	var storage_data:Dictionary = SaveHelper.last_loaded_data.get("Storage", {})
+	
+	if storage_data.is_empty():
+		return FAILED
+	
+	for resource_type_str:String in storage_data:
+		add_resource(resource_type_str.to_int(), storage_data[resource_type_str])
+	
+	return OK
