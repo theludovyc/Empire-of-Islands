@@ -60,27 +60,23 @@ func update_global_production_rate(resource_type: Resources.Types):
 	)
 
 
-func has_resources_to_construct_building(building_id: Buildings.Ids) -> bool:
-	var building_cost = Buildings.get_building_cost(building_id)
-
+func has_resources_to_construct_building(building_cost:Array) -> bool:
 	if building_cost.is_empty():
 		return true
 
 	for cost in building_cost:
-		if cost[1] > storage.get(cost[0], 0):
+		if abs(cost[1]) > storage.get(cost[0], 0):
 			return false
 
 	return true
 
 
-func conclude_building_construction(building_id: Buildings.Ids):
-	var building_cost = Buildings.get_building_cost(building_id)
-
+func conclude_building_construction(building_cost:Array):
 	if building_cost.is_empty():
 		return
 
 	for cost in building_cost:
-		add_resource(cost[0], -cost[1])
+		add_resource(cost[0], cost[1])
 
 
 func recover_building_construction(building_id: Buildings.Ids):

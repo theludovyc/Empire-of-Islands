@@ -84,6 +84,27 @@ func _ready():
 
 	pass  # Replace with function body.
 
+# return [money_cost, [[Resources.Types, cost], ...]]
+func get_building_total_cost(building_id, trees_to_destroy) -> Array:
+	var trees_to_destroy_final_cost := 0
+	
+	if trees_to_destroy > 0:
+		trees_to_destroy_final_cost = trees_to_destroy * Trees_Destroy_Cost
+	
+	var building_cost = Buildings.get_building_cost(building_id).duplicate(true)
+	
+	if building_cost.is_empty():
+		return [-trees_to_destroy_final_cost, []]
+		
+	for i in range(building_cost.size()):
+		var cost = building_cost[i]
+			
+		cost[1] *= -1
+			
+		if trees_to_destroy > 0 and (cost[0] == Resources.Types.Wood):
+			cost[1] += trees_to_destroy
+	
+	return [-trees_to_destroy_final_cost, building_cost]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -126,82 +147,66 @@ func _process(delta):
 
 		var building_id = cursor_entity.building_id
 
+		# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
 		var trees_to_destroy = tm.is_entityStatic_constructible(cursor_entity, tile_pos)
-
-		var trees_to_destroy_final_cost := 0
-
-		if trees_to_destroy > 0:
-			trees_to_destroy_final_cost = trees_to_destroy * Trees_Destroy_Cost
-
-			if trees_to_destroy_final_cost > 0:
-				gui.set_rtl_info_text_money_cost(trees_to_destroy_final_cost)
-				gui.set_rtl_visibility(true)
-		else:
-			gui.set_rtl_visibility(false)
-
-		var is_constructible = false
-
-		if (
-			trees_to_destroy >= 0
-			and (
-				trees_to_destroy_final_cost == 0
-				or (
-					trees_to_destroy_final_cost > 0
-					and trees_to_destroy_final_cost <= the_bank.money
-				)
-			)
-			and the_storage.has_resources_to_construct_building(building_id)
-		):
-			is_constructible = true
-
-		if is_constructible:
-			if trees_to_destroy > 0:
-				cursor_entity.modulate = Color(Color.ORANGE, 0.6)
-			else:
-				cursor_entity.modulate = Color(Color.GREEN, 0.6)
-		else:
+		
+		if (trees_to_destroy < 0):
 			cursor_entity.modulate = Color(Color.RED, 0.6)
+			
+			gui.set_rtl_visibility(false)
+		else:
+			var building_total_cost = get_building_total_cost(building_id, trees_to_destroy)
+
+			if (
+				(building_total_cost[0] >= 0 or
+				(building_total_cost[0] < 0 and abs(building_total_cost[0]) < the_bank.money))
+				and the_storage.has_resources_to_construct_building(building_total_cost[1])
+			):
+				gui.set_rtl_info_buiding_info(building_total_cost)
+				gui.set_rtl_visibility(true)
+				
+				if trees_to_destroy > 0:
+					cursor_entity.modulate = Color(Color.ORANGE, 0.6)
+				else:
+					cursor_entity.modulate = Color(Color.GREEN, 0.6)
+
+				if (
+					not cursor_entity_wait_release
+					and Input.is_action_just_pressed("alt_command")
+				):
+					match Buildings.get_building_type(building_id):
+						Buildings.Types.Residential:
+							var amount := Buildings.get_max_workers(building_id)
+
+							population += amount
+
+							the_factory.population_increase(amount)
+
+						Buildings.Types.Producing:
+							the_factory.add_workers(
+								Buildings.get_produce_resource(building_id),
+								Buildings.get_max_workers(building_id)
+							)
+
+					the_bank.money += building_total_cost[0]
+
+					the_storage.conclude_building_construction(building_total_cost[1])
+
+					event_bus.send_building_created.emit(building_id)
+
+					tm.build_entityStatic(cursor_entity, tile_pos)
+
+					gui.set_rtl_visibility(false)
+
+					cursor_entity.modulate = Color.WHITE
+					cursor_entity.build()
+					cursor_entity = null
 
 		if cursor_entity_wait_release and Input.is_action_just_released("alt_command"):
 			cursor_entity_wait_release = false
 
-		if (
-			not cursor_entity_wait_release
-			and is_constructible
-			and Input.is_action_just_pressed("alt_command")
-		):
-			match Buildings.get_building_type(building_id):
-				Buildings.Types.Residential:
-					var amount := Buildings.get_max_workers(building_id)
-
-					population += amount
-
-					the_factory.population_increase(amount)
-
-				Buildings.Types.Producing:
-					the_factory.add_workers(
-						Buildings.get_produce_resource(building_id),
-						Buildings.get_max_workers(building_id)
-					)
-
-			if trees_to_destroy_final_cost > 0:
-				gui.set_rtl_visibility(false)
-
-				the_bank.money -= trees_to_destroy_final_cost
-
-			the_storage.conclude_building_construction(building_id)
-
-			event_bus.send_building_created.emit(building_id)
-
-			tm.build_entityStatic(cursor_entity, tile_pos)
-
-			cursor_entity.modulate = Color.WHITE
-			cursor_entity.build()
-			cursor_entity = null
-
 		if cursor_entity and Input.is_action_just_pressed("main_command"):
-			if trees_to_destroy_final_cost > 0:
-				gui.set_rtl_visibility(false)
+			gui.set_rtl_visibility(false)
 
 			event_bus.send_building_creation_aborted.emit(building_id)
 
