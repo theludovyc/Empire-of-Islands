@@ -2,6 +2,11 @@ extends MainMenu
 
 @onready var panel_menu = %PanelMenu
 
+func _ready() -> void:
+	super._ready()
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_anything_pressed():
