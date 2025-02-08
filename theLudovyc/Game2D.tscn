@@ -92,6 +92,7 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 fit_content = true
 
 [node name="GUI" parent="." instance=ExtResource("6_lovin")]
+layer = 0
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("13_xikc4")]
 unique_name_in_owner = true
