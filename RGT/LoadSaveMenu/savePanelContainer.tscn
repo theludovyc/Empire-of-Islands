@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wal8k0gos06y"]
 
-[ext_resource type="Script" path="res://Script/RGT/LoadSaveMenu/save_panel_container.gd" id="1_np60c"]
+[ext_resource type="Script" path="res://RGT/LoadSaveMenu/save_panel_container.gd" id="1_np60c"]
 
 [node name="SavePanelContainer" type="PanelContainer"]
 script = ExtResource("1_np60c")

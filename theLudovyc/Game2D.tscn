@@ -15,7 +15,7 @@
 [ext_resource type="TileSet" uid="uid://bhin7dsw4tvvl" path="res://theLudovyc/new_tile_set.tres" id="11_gqnmu"]
 [ext_resource type="TileSet" uid="uid://dprvpcto8mhgv" path="res://theLudovyc/tile_set_trees.tres" id="12_25naw"]
 [ext_resource type="Script" path="res://Script/World/GroundLayer.gd" id="12_dmqkb"]
-[ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://Scene/RGT/PauseMenu.tscn" id="13_xikc4"]
+[ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://RGT/PauseMenu/PauseMenu.tscn" id="13_xikc4"]
 [ext_resource type="Script" path="res://Script/World/TreesLayer.gd" id="14_wtd65"]
 
 [node name="Game2D" type="Node"]
@@ -96,6 +96,10 @@ layer = 0
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("13_xikc4")]
 unique_name_in_owner = true
+visible = false
+
+[node name="OptionsButton" parent="GUI/PauseMenu/MenuContainer/VBoxContainer/MenuButtons" index="3"]
+visible = false
 
 [connection signal="ask_create_building" from="EventBus" to="." method="_on_EventBus_ask_create_building"]
 [connection signal="ask_demolish_current_building" from="EventBus" to="." method="_on_EventBus_ask_demolish_current_building"]
@@ -106,3 +110,5 @@ unique_name_in_owner = true
 [connection signal="tick" from="TheTicker" to="TheFactory" method="_on_TheTicker_tick"]
 [connection signal="timeout" from="TheTicker" to="TheTicker" method="_on_timeout"]
 [connection signal="ask_to_save" from="GUI/PauseMenu" to="." method="_on_PauseMenu_ask_to_save"]
+
+[editable path="GUI/PauseMenu"]

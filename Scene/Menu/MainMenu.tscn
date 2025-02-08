@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://fnwe2ccpoxu7" path="res://Art/Image/Gui/Icons/MainMenu/multiplayer_bw.png" id="11_ulff8"]
 [ext_resource type="Texture2D" uid="uid://dx3wfk7nhepo7" path="res://Art/Image/Gui/Logos/uh_no_text.svg" id="12_q4rhy"]
 [ext_resource type="Texture2D" uid="uid://lxvd4qr8d35m" path="res://Art/Image/Gui/Logos/uh_only_text.svg" id="13_yw4on"]
-[ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://Scene/RGT/loadSaveMenu.tscn" id="15_fufc5"]
+[ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://RGT/LoadSaveMenu/loadSaveMenu.tscn" id="15_fufc5"]
 
 [sub_resource type="Animation" id="Animation_ft716"]
 length = 0.001
@@ -301,6 +301,13 @@ alignment = "right"
 text = "Connect"
 texture = ExtResource("11_ulff8")
 
+[node name="ContinueButton" type="Button" parent="Decoration/MenuItems"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
 [node name="Logo" type="Control" parent="."]
 custom_minimum_size = Vector2(40, 40)
 anchors_preset = 0
@@ -361,9 +368,12 @@ grow_vertical = 2
 
 [node name="LoadSaveMenu" parent="PanelMenu" instance=ExtResource("15_fufc5")]
 unique_name_in_owner = true
-visible = false
-layout_mode = 1
-metadata/_edit_use_anchors_ = true
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="BackButton" type="Button" parent="PanelMenu"]
 layout_mode = 1

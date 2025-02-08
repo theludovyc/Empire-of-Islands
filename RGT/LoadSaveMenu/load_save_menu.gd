@@ -5,7 +5,7 @@ signal no_save_to_load
 const confirm_load = "Are you sure you want to load this save?\n"
 const confirm_delete = "Are you sure you want to delete this save ?\n"
 
-var SavePanel = preload("res://scenes/LoadSaveMenu/savePanelContainer.tscn")
+var SavePanel = preload("res://RGT/LoadSaveMenu/savePanelContainer.tscn")
 
 @onready var vbox_container = $VBoxContainer
 
@@ -22,8 +22,7 @@ var current_save_panel:Node = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if SaveHelper.save_file_names.is_empty():
-		SaveHelper.update_save_file_names()
+	SaveHelper.update_save_file_names()
 	
 	if SaveHelper.save_file_names.is_empty():
 		push_warning("No save to load")

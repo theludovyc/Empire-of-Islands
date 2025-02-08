@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://choevp6ilq78t"]
 
-[ext_resource type="Script" path="res://Script/RGT/LoadSaveMenu/load_save_menu.gd" id="1_nyk5l"]
+[ext_resource type="Script" path="res://RGT/LoadSaveMenu/load_save_menu.gd" id="1_nyk5l"]
 
 [node name="LoadSaveMenu" type="ScrollContainer"]
 anchors_preset = 15

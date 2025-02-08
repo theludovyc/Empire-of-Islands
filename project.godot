@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Unknown Horizons"
 config/version="0.01"
-run/main_scene="res://Scene/RGT/bootstrap.tscn"
+run/main_scene="res://RGT/Bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.3")
 boot_splash/image="res://boot_splash.png"
 config/icon="res://icon.png"

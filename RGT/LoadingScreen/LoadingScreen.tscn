@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd0jbh4metflb"]
+[gd_scene load_steps=5 format=3 uid="uid://cd0jbh4metflb"]
 
-[ext_resource type="Texture2D" uid="uid://nrp4xkogand" path="res://Art/Image/Gui/Background/MainMenu/bg_4.png" id="1_ir03w"]
-[ext_resource type="Script" path="res://RGT/LoadingScreen/LoadingScreen.gd" id="2_o72ml"]
+[ext_resource type="Script" path="res://RGT/LoadingScreen/LoadingScreen.gd" id="1_gbk34"]
 
 [sub_resource type="Animation" id="Animation_xbk22"]
 resource_name = "Flash"
@@ -41,61 +40,41 @@ _data = {
 "RESET": SubResource("Animation_2tmr4")
 }
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_ir03w")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="LoadingScreen" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="LoadingScreen" type="MarginContainer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -78.0
+offset_top = -86.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
-script = ExtResource("2_o72ml")
+script = ExtResource("1_gbk34")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LoadingScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="StatusLabel" type="Label" parent="LoadingScreen/VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Loading..."
 horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="LoadingScreen/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 1
 max_value = 1.0
 
-[node name="ContinueLabel" type="Label" parent="LoadingScreen/VBoxContainer"]
+[node name="ContinueLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingScreen"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_pf4xo")

@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdwvtbtwmrqbn"]
+[gd_scene load_steps=5 format=3 uid="uid://cdwvtbtwmrqbn"]
 
-[ext_resource type="Script" path="res://Script/RGT/PauseMenu.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://Scene/RGT/ConfirmDialog.tscn" id="2_ovglx"]
+[ext_resource type="Script" path="res://RGT/PauseMenu/PauseMenu.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://RGT/RGT_Dialogs/RGT_ConfirmationDialog.tscn" id="2_ovglx"]
+[ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://RGT/OptionsMenu/OptionsContainer.tscn" id="4_pyl8d"]
+[ext_resource type="PackedScene" uid="uid://cy4anjja2feca" path="res://RGT/RGT_Dialogs/RGT_YesNoDialog.tscn" id="4_rf7yh"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +16,6 @@ grow_vertical = 2
 script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,7 +71,6 @@ text = "Restart"
 
 [node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuButtons"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Options"
@@ -87,9 +86,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit Game"
-
-[node name="ConfirmDialog" parent="." instance=ExtResource("2_ovglx")]
-unique_name_in_owner = true
 
 [node name="SubMenuContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -112,6 +108,18 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 8
 
+[node name="MarginContainer" type="MarginContainer" parent="SubMenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OptionsContainer" parent="SubMenuContainer/VBoxContainer/MarginContainer" instance=ExtResource("4_pyl8d")]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="MarginContainer2" type="MarginContainer" parent="SubMenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
@@ -125,6 +133,18 @@ layout_mode = 2
 text = "Back"
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+unresizable = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RGT_ConfirmationDialog" parent="." instance=ExtResource("2_ovglx")]
+unique_name_in_owner = true
+
+[node name="RGT_YesNoDialog" parent="." instance=ExtResource("4_rf7yh")]
 unique_name_in_owner = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
