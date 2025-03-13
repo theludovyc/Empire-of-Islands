@@ -1,20 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://k8dcrfma0xk4"]
 
-[ext_resource type="Texture2D" uid="uid://xfoejswrri4j" path="res://theLudovyc/Building/residential.png" id="1_xexqh"]
+[ext_resource type="Texture2D" uid="uid://hw78qig7tpv5" path="res://theLudovyc/Building/warehouse.png" id="1_pi4g1"]
 [ext_resource type="Script" path="res://theLudovyc/Building/Building.gd" id="2_kplai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3e1t"]
 size = Vector2(104, 69)
 
 [node name="Residential" type="Sprite2D"]
-texture = ExtResource("1_xexqh")
+texture = ExtResource("1_pi4g1")
 centered = false
 offset = Vector2(-64, -112)
 hframes = 4
 script = ExtResource("2_kplai")
-building_id = 1
-width = 2
-height = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 

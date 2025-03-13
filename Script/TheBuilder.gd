@@ -1,10 +1,6 @@
 extends Node
 
-const Buildings_Scenes = {
-	Buildings.Ids.Warehouse: preload("res://theLudovyc/Building/Warehouse.tscn"),
-	Buildings.Ids.Tent: preload("res://theLudovyc/Building/Residential.tscn"),
-	Buildings.Ids.Lumberjack: preload("res://theLudovyc/Building/Lumberjack.tscn")
-}
+const Building_2D_Scene = preload("res://theLudovyc/Building/Building2D.tscn")
 
 var warehouse: Building2D
 
@@ -13,12 +9,9 @@ var warehouse: Building2D
 @onready var tilemap:TileMap = %TileMap
 
 func instantiate_building(building_id: Buildings.Ids) -> Building2D:
-	if not Buildings_Scenes.has(building_id):
-		push_error("Cannot instanciate a building with this Id: " + str(building_id))
-		
-		return null
+	var instance = Building_2D_Scene.instantiate() as Building2D
 	
-	var instance = Buildings_Scenes[building_id].instantiate() as Building2D
+	instance.building_id = building_id
 
 	node_buildings.add_child(instance)
 
