@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bndkti6aifavu" path="res://theLudovyc/Building/lumberjack.png" id="1_kd81c"]
 [ext_resource type="Script" path="res://theLudovyc/Building/Building.gd" id="2_tlcd8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo1hb"]
-size = Vector2(114, 68)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_yox5c"]
+points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 
 [node name="Lumberjack" type="Sprite2D"]
 texture = ExtResource("1_kd81c")
@@ -12,12 +12,9 @@ centered = false
 offset = Vector2(-64, -112)
 hframes = 4
 script = ExtResource("2_tlcd8")
-building_id = 2
-width = 2
-height = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -17)
-shape = SubResource("RectangleShape2D_mo1hb")
+shape = SubResource("ConvexPolygonShape2D_yox5c")

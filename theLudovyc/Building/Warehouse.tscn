@@ -13,8 +13,6 @@ offset = Vector2(-96, -64)
 hframes = 4
 frame = 1
 script = ExtResource("2_0u0ac")
-width = 3
-height = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 

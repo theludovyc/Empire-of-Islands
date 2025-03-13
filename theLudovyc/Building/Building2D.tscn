@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://o5ekxgxok0tk"]
+
+[ext_resource type="Script" path="res://theLudovyc/Building/Building.gd" id="2_8of1u"]
+
+[node name="Building2D" type="Sprite2D"]
+hframes = 4
+script = ExtResource("2_8of1u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -16, -32, 0, 0, 16, 32, 0)
