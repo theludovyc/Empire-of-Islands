@@ -18,6 +18,7 @@ var _resource_type: Resources.Types:
 		if is_instance_valid(_resource_texture):
 			if Resources.Icons.has(value):
 				_resource_texture.texture = Resources.Icons[value]
+				_resource_texture.tooltip_text = Resources.get_resource_name(value)
 
 
 func _ready():
