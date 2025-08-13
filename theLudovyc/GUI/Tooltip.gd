@@ -11,6 +11,7 @@ func set_building_info(building_id: Buildings.Ids):
 	if building_cost.is_empty():
 		return
 
+	rtl.add_text("%s\n" % Buildings.get_building_name(building_id))
 	rtl.add_text("Cost :\n")
 
 	for i in range(building_cost.size()):
