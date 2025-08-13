@@ -382,6 +382,7 @@ offset_left = 32.0
 offset_top = 69.0
 offset_right = 64.0
 offset_bottom = 101.0
+tooltip_text = "Build"
 
 [node name="MarketMenuButton" parent="Widget" instance=ExtResource("14_iofba")]
 layout_mode = 1
@@ -389,6 +390,7 @@ offset_left = -17.5
 offset_top = 75.0
 offset_right = 17.5
 offset_bottom = 121.0
+tooltip_text = "Market"
 texture_normal = ExtResource("15_t1pbn")
 texture_pressed = ExtResource("16_ebb3u")
 texture_hover = ExtResource("17_kjgte")
@@ -468,6 +470,7 @@ text = "Unknow City Name
 
 [node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Population"
 texture = ExtResource("15_p3ujw")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
@@ -503,7 +506,11 @@ offset_bottom = 90.0
 layout_mode = 2
 script = ExtResource("37_dntbd")
 
+[node name="PanelContainer" parent="Money+Resources/ControlMoney/HBoxContainer" index="1"]
+tooltip_text = "Money"
+
 [node name="TextureButton" parent="Money+Resources/ControlMoney" index="1"]
+tooltip_text = "Money"
 script = null
 
 [node name="Resources" type="HBoxContainer" parent="Money+Resources"]
@@ -515,6 +522,12 @@ layout_mode = 2
 [node name="ControlResourceTextile" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 1
+
+[node name="PanelContainer" parent="Money+Resources/Resources/ControlResourceTextile/HBoxContainer" index="1"]
+tooltip_text = "Textile"
+
+[node name="TextureButton" parent="Money+Resources/Resources/ControlResourceTextile" index="1"]
+tooltip_text = "Textile"
 
 [node name="RichTextLabelInfo" type="RichTextLabel" parent="."]
 visible = false
