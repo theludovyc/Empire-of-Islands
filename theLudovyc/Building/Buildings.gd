@@ -30,6 +30,7 @@ const datas = {
 # warning: conflict with get_name
 static func get_building_name(building_id: Buildings.Ids) -> StringName:
 	if not datas.has(building_id):
+		push_warning('building of id "%d" was not found ' % building_id)
 		return StringName()
 	return datas[building_id][Datas.Name]
 
