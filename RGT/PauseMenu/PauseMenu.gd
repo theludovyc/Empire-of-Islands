@@ -40,6 +40,7 @@ func _on_resume_button_pressed():
 	hide()
 	set_process(false)
 	get_tree().paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 func _on_restart_button_pressed():
 	confirm_dialog.dialog_text = confirm_restart
