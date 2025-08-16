@@ -112,9 +112,10 @@ func _process(delta):
 		pause_menu.show()
 		pause_menu.set_process(true)
 		get_tree().paused = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	var mouse_pos = get_viewport().get_mouse_position()
-
+	
 	rtl.text = ""
 
 	rtl.text += str(mouse_pos) + "\n"
