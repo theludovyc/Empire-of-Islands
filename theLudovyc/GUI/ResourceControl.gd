@@ -9,6 +9,9 @@ extends PanelContainer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureButton.set_resource_icon(resource_type)
+	var tooltil_text = Resources.Types.keys()[resource_type]
+	$TextureButton.tooltip_text = tooltil_text
+	$HBoxContainer/PanelContainer.tooltip_text = tooltil_text
 
 	var current_node = get_tree().current_scene
 
