@@ -5,6 +5,7 @@ func _init() -> void:
 	var dialog_label : Label = get_label()
 	dialog_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	dialog_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	dialog_label.add_theme_color_override("font_color", Color.WHITE)
 	
 	unresizable = true
 
